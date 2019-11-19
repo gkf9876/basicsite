@@ -10,7 +10,7 @@ import springbook.user.domain.Board;
 public class BoardDaoTest {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
+		ApplicationContext context = new GenericXmlApplicationContext("test-applicationContext.xml");
 		BoardDao dao = context.getBean("boardDao", BoardDao.class);
 		
 		Board board = new Board();

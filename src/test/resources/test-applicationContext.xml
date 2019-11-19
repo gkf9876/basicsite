@@ -6,7 +6,7 @@
 			
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.sqlite.JDBC"/>
-		<property name="url" value="jdbc:sqlite:basicsite.db"/>
+		<property name="url" value="jdbc:sqlite:target/test-classes/test-basicsite.db"/>
 	</bean>
 	<bean id="boardDao" class="springbook.user.dao.BoardDao">
 		<property name="dataSource" ref="dataSource"/>
