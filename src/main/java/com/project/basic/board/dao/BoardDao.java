@@ -1,4 +1,4 @@
-package springbook.user.dao;
+package com.project.basic.board.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +9,14 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import springbook.user.domain.Board;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import com.project.basic.board.domain.Board;
+
+@Repository
 public class BoardDao {
+	@Autowired
 	private DataSource dataSource;
 	
 	public void setDataSource(DataSource dataSource) {
@@ -73,5 +78,15 @@ public class BoardDao {
 		c.close();
 		
 		return result;
+	}
+	
+	public void deleteAll() throws SQLException {
+		Connection c = dataSource.getConnection();
+		
+		PreparedStatement ps = c.prepareStatement("delete from board");
+		ps.executeUpdate();
+		
+		ps.close();
+		c.close();
 	}
 }

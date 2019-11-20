@@ -1,4 +1,4 @@
-package springbook.user.domain;
+package com.project.basic.board.domain;
 
 public class Board {
 	int index;

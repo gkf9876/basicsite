@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import springbook.user.dao.BoardDao;
-import springbook.user.domain.Board;
+import com.project.basic.board.dao.BoardDao;
+import com.project.basic.board.domain.Board;
 
 /**
  * Handles requests for the application home page.
@@ -25,6 +26,7 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	@Autowired
 	BoardDao boardDao;
 	
 	/**
@@ -34,10 +36,6 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Board board, Locale locale, Model model) throws ClassNotFoundException, SQLException {
-
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-		boardDao = context.getBean("boardDao", BoardDao.class);
-		
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
@@ -54,10 +52,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write(Board board, Model model) throws ClassNotFoundException, SQLException {
-
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-		boardDao = context.getBean("boardDao", BoardDao.class);
-		
 		model.addAttribute("board", board);
 		
 		return "write";
@@ -65,10 +59,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String write(Board board) throws ClassNotFoundException, SQLException {
-
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-		boardDao = context.getBean("boardDao", BoardDao.class);
-		
 		boardDao.add(board);
 		
 		return "redirect:/";
