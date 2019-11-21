@@ -19,10 +19,6 @@ public class BoardDao {
 	@Autowired
 	private DataSource dataSource;
 	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-	
 	public void add(Board board) throws ClassNotFoundException, SQLException{
 		Connection c = dataSource.getConnection();
 		
