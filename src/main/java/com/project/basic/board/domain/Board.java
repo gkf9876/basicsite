@@ -1,15 +1,15 @@
 package com.project.basic.board.domain;
 
 public class Board {
-	int index;
+	int idx;
 	String name;
 	String content;
 	
-	public int getIndex() {
-		return index;
+	public int getIdx() {
+		return idx;
 	}
-	public void setIndex(int index) {
-		this.index = index;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	public String getName() {
 		return name;

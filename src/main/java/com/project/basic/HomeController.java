@@ -1,6 +1,8 @@
 package com.project.basic;
 
 import com.project.basic.board.service.BoardService;
+
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
@@ -31,9 +33,10 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
+	 * @throws IOException 
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Board board, Locale locale, Model model) throws ClassNotFoundException, SQLException {
+	public String home(Board board, Locale locale, Model model) throws ClassNotFoundException, SQLException, IOException {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
@@ -56,7 +59,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(Board board) throws ClassNotFoundException, SQLException {
+	public String write(Board board) throws ClassNotFoundException, SQLException, IOException {
 		boardService.insert(board);
 		
 		return "redirect:/";

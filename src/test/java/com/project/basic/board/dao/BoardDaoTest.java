@@ -3,6 +3,7 @@ package com.project.basic.board.dao;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import org.junit.Test;
@@ -21,16 +22,16 @@ public class BoardDaoTest {
 	BoardDao boardDao;
 	
 	@Test
-	public void addAndGet() throws ClassNotFoundException, SQLException {
+	public void addAndGet() throws ClassNotFoundException, SQLException, IOException {
 		boardDao.deleteAll();
 		
 		Board board = new Board();
 		board.setName("백기선");
 		board.setContent("married");
+	
+		boardDao.insert(board);
 		
-		boardDao.add(board);
-		
-		Board board2 = boardDao.get(board.getName());
+		Board board2 = boardDao.selectOne(board);
 		
 		assertThat(board2.getName(), is("백기선"));
 		assertThat(board2.getContent(), is("married"));

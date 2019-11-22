@@ -131,6 +131,11 @@
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.3</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>

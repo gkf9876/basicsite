@@ -34,7 +34,7 @@
 					<c:otherwise>
 						<c:forEach items="${list}" var="vo">
 							<tr>
-								<td>${vo.index}</td>
+								<td>${vo.idx}</td>
 								<td>${vo.name}</td>
 								<td>${vo.content}</td>
 							</tr>

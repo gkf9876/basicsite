@@ -1,5 +1,6 @@
 package com.project.basic.board.service;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,18 +15,18 @@ public class BoardService {
 	@Autowired
 	BoardDao boardDao;
 	
-	public void insert(Board board) throws ClassNotFoundException, SQLException {
-		boardDao.add(board);
+	public void insert(Board board) throws ClassNotFoundException, SQLException, IOException {
+		boardDao.insert(board);
 	}
 	
 	public void update(Board board) {
 	}
 	
-	public Board selectOne(String name) throws ClassNotFoundException, SQLException {
-		return boardDao.get(name);
+	public Board selectOne(Board board) throws ClassNotFoundException, SQLException, IOException {
+		return boardDao.selectOne(board);
 	}
 	
-	public List<Board> selectList() throws ClassNotFoundException, SQLException{
-		return boardDao.getAll();
+	public List<Board> selectList() throws ClassNotFoundException, SQLException, IOException{
+		return boardDao.selectList();
 	}
 }

@@ -3,6 +3,7 @@ package com.project.basic.board.service;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class BoardServiceTest {
 	BoardService boardService;
 	
 	@Test
-	public void addAndGet() throws ClassNotFoundException, SQLException {
+	public void addAndGet() throws ClassNotFoundException, SQLException, IOException {
 		boardDao.deleteAll();
 		
 		Board board = new Board();
@@ -34,7 +35,7 @@ public class BoardServiceTest {
 		
 		boardService.insert(board);
 		
-		Board board2 = boardService.selectOne(board.getName());
+		Board board2 = boardService.selectOne(board);
 		
 		assertThat(board2.getName(), is("백기선"));
 		assertThat(board2.getContent(), is("married"));

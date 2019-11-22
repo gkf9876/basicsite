@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.basic.board.BoardMapper">
+
+	<select id="selectList" resultType="com.project.basic.board.domain.Board">
+		SELECT * FROM BOARD
+	</select>
+	
+	<select id="select" resultType="com.project.basic.board.domain.Board">
+		SELECT 
+			* 
+		FROM 
+			BOARD
+		WHERE
+			IDX = #{idx}
+	</select>
+	
+	<insert id="insert" parameterType="com.project.basic.board.domain.Board">
+		INSERT INTO BOARD(
+			NAME
+			, CONTENT
+		)VALUES(
+			#{name}
+			, #{content}
+		)
+		<selectKey keyProperty="idx" resultType="integer" order="AFTER">
+			SELECT MAX(IDX) FROM BOARD
+		</selectKey>
+	</insert>
+	
+	<update id="update" parameterType="com.project.basic.board.domain.Board">
+		UPDATE
+			BOARD
+		SET
+			NAME = #{name}
+			, CONTENT = #{content}
+		WHERE
+			IDX = #{idx}
+	</update>
+	
+	<delete id="deleteAll" parameterType="com.project.basic.board.domain.Board">
+		DELETE FROM BOARD
+	</delete>
+</mapper>
