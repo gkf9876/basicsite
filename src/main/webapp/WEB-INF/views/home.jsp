@@ -13,7 +13,7 @@
 	
 	<P>  The time on the server is ${serverTime}. </P>
 	
-	<form:form commandName="board" method="get">
+	<form:form modelAttribute="board" method="get">
 		<table>
 			<colgroup>
 				<col width="*"/>

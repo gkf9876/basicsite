@@ -15,7 +15,7 @@
 	
 	<P>  The time on the server is ${serverTime}. </P>
 	
-	<form:form commandName="board" method="post">
+	<form:form modelAttribute="board" method="post">
 		<table>
 			<colgroup>
 				<col width="*"/>

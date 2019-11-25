@@ -16,4 +16,9 @@
 	
 	<bean id="boardDao" class="com.project.basic.board.dao.BoardDao"/>
 	<bean id="boardService" class="com.project.basic.board.service.BoardService"/>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath*:BoardMapper.xml" />
+	</bean>
 </beans>

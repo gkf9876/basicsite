@@ -46,7 +46,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		model.addAttribute("board", board);
-		model.addAttribute("list", boardService.selectList());
+		model.addAttribute("list", boardService.selectList(board));
 		
 		return "home";
 	}

@@ -23,57 +23,39 @@ import com.project.basic.board.domain.Board;
 @Repository
 public class BoardDao {
 	@Autowired
-	private DataSource dataSource;
-	
-	private SqlSession session;
+	private SqlSessionFactory sqlSessionFactory;
 	
 	public void insert(Board board) throws ClassNotFoundException, SQLException, IOException{
-		if(session == null) {
-			String resource = "mybatis-config.xml";
-			InputStream inputStream = Resources.getResourceAsStream(resource);
-			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			
-			session = sqlSessionFactory.openSession();
-		}
+		SqlSession session = sqlSessionFactory.openSession();
 		
 		session.insert("com.project.basic.board.BoardMapper.insert", board);
+		session.commit();
+		session.close();
 	}
 	
 	public Board selectOne(Board board) throws ClassNotFoundException, SQLException, IOException{
-		if(session == null) {
-			String resource = "mybatis-config.xml";
-			InputStream inputStream = Resources.getResourceAsStream(resource);
-			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			
-			session = sqlSessionFactory.openSession();
-		}
+		SqlSession session = sqlSessionFactory.openSession();
 		
-		return session.selectOne("com.project.basic.board.BoardMapper.select", board);
+		Board result = session.selectOne("com.project.basic.board.BoardMapper.select", board);
+		session.close();
+		
+		return result;
 	}
 	
-	public List<Board> selectList() throws ClassNotFoundException, SQLException, IOException{
-		if(session == null) {
-			String resource = "mybatis-config.xml";
-			InputStream inputStream = Resources.getResourceAsStream(resource);
-			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			
-			session = sqlSessionFactory.openSession();
-		}
+	public List<Board> selectList(Board board) throws ClassNotFoundException, SQLException, IOException{
+		SqlSession session = sqlSessionFactory.openSession();
 		
-		List<Board> result = session.selectList("com.project.basic.board.BoardMapper.selectList");
+		List<Board> result = session.selectList("com.project.basic.board.BoardMapper.selectList", board);
+		session.close();
 		
 		return result;
 	}
 	
 	public void deleteAll() throws SQLException, IOException {
-		if(session == null) {
-			String resource = "mybatis-config.xml";
-			InputStream inputStream = Resources.getResourceAsStream(resource);
-			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			
-			session = sqlSessionFactory.openSession();
-		}
+		SqlSession session = sqlSessionFactory.openSession();
 		
 		session.delete("com.project.basic.board.BoardMapper.deleteAll");
+		session.commit();
+		session.close();
 	}
 }

@@ -26,7 +26,7 @@ public class BoardService {
 		return boardDao.selectOne(board);
 	}
 	
-	public List<Board> selectList() throws ClassNotFoundException, SQLException, IOException{
-		return boardDao.selectList();
+	public List<Board> selectList(Board board) throws ClassNotFoundException, SQLException, IOException{
+		return boardDao.selectList(board);
 	}
 }
