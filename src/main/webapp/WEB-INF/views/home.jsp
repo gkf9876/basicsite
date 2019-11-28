@@ -18,7 +18,7 @@
 	<form:form modelAttribute="board" method="get">
 		<table>
 			<colgroup>
-				<col width="*"/>
+				<col width="5%"/>
 				<col width="*"/>
 				<col width="*"/>
 			</colgroup>
@@ -39,18 +39,17 @@
 					<c:otherwise>
 						<c:forEach items="${list}" var="vo">
 							<tr>
-								<td>${vo.idx}</td>
-								<td>${vo.name}</td>
-								<td>${vo.content}</td>
+								<td style="text-align: center;">${vo.idx}</td>
+								<td style="text-align: center;">${vo.name}</td>
+								<td style="text-align: left;">${vo.content}</td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
 			</tbody>
 		</table>
-		<div>
-			<!-- <a href="javascript:write();">write</a> -->
-			<a href="/basic/write">write</a>
+		<div style="text-align: right;">
+			<a href="/basic/write">글쓰기</a>
 		</div>
 	</form:form>
 	
