@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -13,7 +13,7 @@
 		Hello world!  
 	</h1>
 	
-	<P>  The time on the server is ${serverTime}. </P>
+	<p>  The time on the server is ${serverTime}. </p>
 	
 	<form:form modelAttribute="board" method="post">
 		<table>
@@ -25,13 +25,13 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>num</td>
+					<td>이름</td>
 					<td>
 						<form:input type="text" path="name"/>
 					</td>
 				</tr>
 				<tr>
-					<td>content</td>
+					<td>내용</td>
 					<td>
 						<form:input type="text" path="content"/>
 					</td>
@@ -39,7 +39,7 @@
 			</tbody>
 		</table>
 		<div>
-			<span><a href="javascript:regist();" onclick="">regist</a></span>
+			<span><a href="javascript:regist();" onclick="">등록</a></span>
 		</div>
 	</form:form>
 
