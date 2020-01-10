@@ -15,43 +15,46 @@
 	
 	<p>  The time on the server is ${serverTime}. </p>
 	
-	<form:form modelAttribute="board" method="get">
-		<table>
-			<colgroup>
-				<col width="5%"/>
-				<col width="*"/>
-				<col width="*"/>
-			</colgroup>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>이름</th>
-					<th>내용</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:choose>
-					<c:when test="${empty list}">
-						<tr>
-							<td rowspan="3">게시물이 없습니다.</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${list}" var="vo">
+	<div>
+		<form:form modelAttribute="board" method="get">
+			<table>
+				<colgroup>
+					<col width="5%"/>
+					<col width="*"/>
+					<col width="*"/>
+				</colgroup>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>이름</th>
+						<th>내용</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:choose>
+						<c:when test="${empty list}">
 							<tr>
-								<td style="text-align: center;">${vo.idx}</td>
-								<td style="text-align: center;">${vo.name}</td>
-								<td style="text-align: left;">${vo.content}</td>
+								<td rowspan="3">게시물이 없습니다.</td>
 							</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
-		<div style="text-align: right;">
-			<a href="/basic/write">글쓰기</a>
-		</div>
-	</form:form>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="vo">
+								<tr>
+									<td style="text-align: center;">${vo.idx}</td>
+									<td style="text-align: center;">${vo.name}</td>
+									<td style="text-align: left;">${vo.content}</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+			<div style="text-align: right;">
+				<a href="/basic/write">글쓰기</a>
+				<a href="/basic/websocket">채팅</a>
+			</div>
+		</form:form>
+	</div>
 	
 	<script type="text/javascript">
 	//<![CDATA[

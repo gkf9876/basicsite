@@ -64,4 +64,10 @@ public class HomeController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value = "/websocket", method = RequestMethod.GET)
+	public String websocket(Board board, Locale locale, Model model) throws ClassNotFoundException, SQLException, IOException {
+		
+		return "websocket";
+	}
 }
