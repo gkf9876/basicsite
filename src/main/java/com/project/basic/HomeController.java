@@ -1,12 +1,18 @@
 package com.project.basic;
 
-import com.project.basic.board.service.BoardService;
-
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.basic.board.domain.Board;
+import com.project.basic.board.service.BoardService;
 
 /**
  * Handles requests for the application home page.
@@ -69,5 +76,49 @@ public class HomeController {
 	public String websocket(Board board, Locale locale, Model model) throws ClassNotFoundException, SQLException, IOException {
 		
 		return "websocket";
+	}
+	
+	@RequestMapping("/download")
+	public void downloadFile(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String fileNm = URLEncoder.encode("IT경영.pdf", "UTF-8").replaceAll("\\+", "%20");
+		fileNm = "\"" + fileNm + "\"";
+		
+		File file = new File("C:\\Users\\gkf9876\\Desktop\\IT경영.pdf");
+		BufferedInputStream in = new BufferedInputStream(new FileInputStream(file));
+		
+		response.setHeader("Content-Disposition", "attachment; filename=" + fileNm);
+		//response.setContentType("application/smnet; charset=UTF-8");
+		response.setContentType("application/octet-stream; charset=UTF-8");
+		//response.setHeader("Content-Type", "application/octet-stream");
+		
+		byte abyte0[] = new byte[4096];
+		int numberRead = 0;
+		
+		
+		ServletOutputStream oput = response.getOutputStream();
+		try {
+			while((numberRead = in.read(abyte0, 0, 4096)) != -1){
+				oput.write(abyte0, 0, numberRead);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(in != null) {
+					in.close();
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				if(oput != null) {
+					oput.flush();
+					oput.close();
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
