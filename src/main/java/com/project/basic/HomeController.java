@@ -3,11 +3,15 @@ package com.project.basic;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.ServletOutputStream;
@@ -21,9 +25,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.basic.board.domain.Board;
+import com.project.basic.board.file.upload.FileUploadUtil;
 import com.project.basic.board.service.BoardService;
+
+import net.sf.json.JSONArray;
 
 /**
  * Handles requests for the application home page.
@@ -80,10 +88,10 @@ public class HomeController {
 	
 	@RequestMapping("/download")
 	public void downloadFile(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String fileNm = URLEncoder.encode("IT�濵.pdf", "UTF-8").replaceAll("\\+", "%20");
+		String fileNm = URLEncoder.encode("Microsoft Visual C++ 6.0 installer.exe", "UTF-8").replaceAll("\\+", "%20");
 		fileNm = "\"" + fileNm + "\"";
 		
-		File file = new File("C:\\Users\\gkf9876\\Desktop\\IT�濵.pdf");
+		File file = new File("D:\\Users\\gkf98\\OneDrive\\諛뷀깢 �솕硫�\\Microsoft Visual C++ 6.0 installer.exe");
 		BufferedInputStream in = new BufferedInputStream(new FileInputStream(file));
 		
 		response.setHeader("Content-Disposition", "attachment; filename=" + fileNm);
@@ -120,5 +128,38 @@ public class HomeController {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	public String upload(Board board, Locale locale, Model model) throws ClassNotFoundException, SQLException, IOException {
+		
+		return "upload";
+	}
+	
+	@RequestMapping(value = "/uploadfiles")
+	@ResponseBody
+	public String uploadFile(HttpServletRequest request){
+ 
+		Calendar calendar=Calendar.getInstance();
+		List<String> filePathList = new ArrayList<String>();
+		String filePath= "Test";
+		String filePathUrl="C:\\Users\\gkf9876\\Desktop\\"+calendar.get(Calendar.YEAR)+calendar.get(Calendar.MONTH);
+		filePath=filePath+File.separatorChar+calendar.get(Calendar.YEAR)+calendar.get(Calendar.MONTH);
+		try {
+			filePathList = FileUploadUtil.uploadFile(request, filePath,filePathUrl);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch(Exception ex){
+			ex.printStackTrace();
+		}
+ 
+		if(filePathList.size() == 0){
+			return "Invalid file type.";
+		}else {
+			return "1";
+		}
+		//JSONArray result = JSONArray.fromObject(filePathList);
+		//return result;
 	}
 }
