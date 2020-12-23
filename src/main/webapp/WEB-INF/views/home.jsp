@@ -52,7 +52,8 @@
 			<div style="text-align: right;">
 				<a href="/basic/write">글쓰기</a>
 				<a href="/basic/websocket">채팅</a>
-				<a href="/basic/download">다운</a>
+				<a href="/basic/download1">다운1</a>
+				<a href="/basic/download2">다운2</a>
 			</div>
 		</form:form>
 	</div>
