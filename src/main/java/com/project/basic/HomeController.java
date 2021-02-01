@@ -259,4 +259,22 @@ public class HomeController {
 		}
 		return "Success";
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/naverClose")
+	public String naverConnectClose(Model model, HttpServletRequest request) {
+		String result = "";
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpPost httpPost = new HttpPost("https://kapi.kakao.com/v1/user/unlink?target_id_type=user_id&target_id=1254511318");
+		
+		try {
+			httpPost.addHeader("Authorization", "KakaoAK 4e9dd97c4fc8ecfd757d76e6f69faaad");
+			CloseableHttpResponse response = httpClient.execute(httpPost);
+			result = EntityUtils.toString(response.getEntity());
+			System.out.println(result);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "Success";
+	}
 }

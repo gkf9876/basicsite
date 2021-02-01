@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
@@ -25,6 +26,10 @@
 	  />
 	</a>
 	<a href="/basic/kakaoClose">연결끊기</a>
+	</div>
+	<div id="naverIdLogin" alt="네이버 계정으로 시작하기" class="naver">
+		<span>네이버 로그인</span>
+		<a id="naverLogin" onclick="document.getElementById('naverIdLogin_loginButton').click();" title="네이버 계정으로 시작하기" class="naver"></a>
 	</div>
 	
 	<script type="text/javascript">
@@ -58,6 +63,35 @@
 					console.log(JSON.stringify(err));
 				}
 			});
+		}
+		
+		var naverLogin = new naver.LoginWithNaverId(
+			{
+				clientId: "hrj7z8HnNdnKEnFq1Xeg",
+				callbackUrl: "https://opinion.lawmaking.go.kr/gcom/login",
+				isPopup: false,
+				loginButton: {color: "green", type: 1, height: 40},
+				callbackHandel: false
+			}
+		);
+		
+		naverLogin.init();
+		
+		window.addEventListener('load', function(){
+			naverLogin.getLoginStatus(function (status){
+				if(status){
+					var email = naverLogin.user.getEmail();
+					if(email == undefined || email == null){
+						alert('이메일은 필수정보입니다. 정보제공을 동의해 주세요');
+						naverLogin.reprompt();
+						return;
+					}
+					setLoginStatus();
+				}
+			});
+		});
+		
+		function setLoginStatus(){
 		}
 	//]]>
 	</script>
