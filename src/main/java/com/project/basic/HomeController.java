@@ -277,4 +277,25 @@ public class HomeController {
 		}
 		return "Success";
 	}
+	
+	@RequestMapping(value = "/redirectBlankUrl", method = RequestMethod.GET)
+	public String redirectBlankUrl(Board board, Locale locale, Model model, HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
+		return "RedirectBlank";
+	}
+	
+	@RequestMapping(value = "/snsLogin", method = RequestMethod.POST)
+	public String snsLogin(Board board, Locale locale, Model model, HttpServletRequest request) throws ClassNotFoundException, SQLException, IOException {
+		String snsUsrId = request.getParameter("snsUsrId");
+		String snsUsrEmail = request.getParameter("snsUsrEmail");
+		String snsUsrNm = request.getParameter("snsUsrNm");
+		String snsDivision = request.getParameter("snsDivision");
+		String certMethCd = request.getParameter("certMethCd");
+		
+		model.addAttribute("snsUsrId", snsUsrId);
+		model.addAttribute("snsUsrEmail", snsUsrEmail);
+		model.addAttribute("snsUsrNm", snsUsrNm);
+		model.addAttribute("snsDivision", snsDivision);
+		model.addAttribute("certMethCd", certMethCd);
+		return "snsLogin";
+	}
 }
