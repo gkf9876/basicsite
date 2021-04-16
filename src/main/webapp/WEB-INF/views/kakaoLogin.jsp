@@ -69,7 +69,7 @@
 							}
 							
 							$('#snsUsrId').val(kakaoData.snsUsrId);
-							$('#snsUSrEmail').val(kakaoData.snsUsrEmail);
+							$('#snsUsrEmail').val(kakaoData.snsUsrEmail);
 							$('#snsUsrNm').val(kakaoData.snsUsrNm);
 							$('#snsDivision').val(kakaoData.snsDivision);
 							$('form#snsLoginForm #certMethCd').val(kakaoData.certMethCd);
